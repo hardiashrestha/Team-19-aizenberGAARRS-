@@ -84,5 +84,5 @@ def augment_images_in_folder(folder_path):
                 print(f'Saved augmented image: {augmented_image_path}')
 
 # Example usage
-folder_path = '/Users/aaravbansal/Developer/Research Bootcamp/Traindata/VASC copy'
+folder_path = '' 
 augment_images_in_folder(folder_path)
