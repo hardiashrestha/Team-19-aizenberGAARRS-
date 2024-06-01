@@ -77,7 +77,7 @@ base_model1 = VGG19(include_top=False, weights='imagenet', input_tensor=input1)
 for layer in base_model1.layers:
     layer.trainable = False
 x1 = base_model1.output
-x1 = Conv2D(128, (3, 3), activation='softmax', padding='same')(x1)
+x1 = Conv2D(128, (3, 3), activation='relu', padding='same')(x1)
 x1 = MaxPooling2D((2, 2))(x1)
 x1 = Flatten()(x1)
 
@@ -86,7 +86,7 @@ base_model2 = ResNet152V2(include_top=False, weights='imagenet', input_tensor=in
 for layer in base_model2.layers:
     layer.trainable = False
 x2 = base_model2.output
-x2 = Conv2D(128, (3, 3), activation='softmax', padding='same')(x2)
+x2 = Conv2D(128, (3, 3), activation='relu', padding='same')(x2)
 x2 = MaxPooling2D((2, 2))(x2)
 x2 = Flatten()(x2)
 
@@ -99,7 +99,7 @@ output = Dense(num_classes, activation='softmax')(x)
 model = Model(inputs=[input1, input2], outputs=output)
 
 # Compile the model
-model.compile(optimizer=Adam(learning_rate=0.0001),
+model.compile(optimizer=Adam(learning_rate=0.001),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
@@ -117,7 +117,7 @@ for layer in base_model1.layers:
 for layer in base_model2.layers:
     layer.trainable = True
 
-model.compile(optimizer=Adam(learning_rate=0.0001),
+model.compile(optimizer=Adam(learning_rate=0.001),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
